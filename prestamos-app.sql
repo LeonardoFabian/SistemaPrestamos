@@ -91,7 +91,7 @@ descripcion TEXT NULL
   JOIN BANCO.Transacciones tra ON cu.id = tra.idcuenta
   */
 
-  
+ 
 
   -- VIEW CLIENTE - BALANCE TOTAL PRESTAMOS
    CREATE VIEW [BANCO].VW_BALANCE_TOTAL_PRESTAMOS
@@ -102,11 +102,7 @@ descripcion TEXT NULL
 	cli.cedula AS cedula,
 	CONCAT(cli.nombre ,' ', cli.apellido) AS nombre,
 	pre.valorinicial AS balanceinicial, 	
-	(
-		(SELECT TOP 1 t1.monto FROM BANCO.Transacciones t1 JOIN BANCO.Cuentas c ON t1.idcuenta = c.id WHERE t1.idtipotransaccion = 2 ORDER BY t1.monto DESC) 
-		- 
-		(SELECT SUM(t2.monto) FROM BANCO.Transacciones t2 JOIN BANCO.Cuentas c ON t2.idcuenta = c.id WHERE t2.idtipotransaccion = 1)
-	) AS balanceactual,	
+	(pre.valorinicial - (pre.montocuota * pre.cuotaspagadas)) AS balanceactual,	
 	pre.montocuota AS cuotamensual,
 	(pre.plazo - pre.cuotaspagadas) AS cuotaspendientes
 	
@@ -137,7 +133,7 @@ descripcion TEXT NULL
 			month,
 			(SELECT COUNT(t4.fecha) FROM BANCO.Transacciones t4 JOIN BANCO.Cuentas c ON t4.idcuenta = c.id WHERE t4.idtipotransaccion = 1 GROUP BY t4.fecha)
 				,
-			(SELECT TOP 1 t3.fecha AS fdesembolso FROM BANCO.Transacciones t3 JOIN BANCO.Cuentas c ON t3.idcuenta = c.id WHERE idtipotransaccion = 3 ORDER BY fdesembolso DESC) 
+			(SELECT TOP 1 t3.fecha AS fdesembolso FROM BANCO.Transacciones t3 JOIN BANCO.Cuentas c ON t3.idcuenta = c.id WHERE idtipotransaccion = 3 ORDER BY t3.fecha DESC) 
 		)AS fproximopago			
 	)AS fechaproximopago,
 	pre.montocuota AS montocuotas,
@@ -155,6 +151,15 @@ descripcion TEXT NULL
   JOIN BANCO.Prestamos pre ON cu.id = pre.idcuenta
   JOIN BANCO.Transacciones tra ON cu.id = tra.idcuenta
  
+
+ SELECT * FROM BANCO.Transacciones WHERE idtipotransaccion = 3
+
+
+
+
+
+
+
 
   -- VIEW CLIENTES
    CREATE VIEW [BANCO].VW_HISTORICO_PRESTAMOS
