@@ -1,3 +1,7 @@
+CREATE DATABASE prestamos-app;
+GO
+
+
 CREATE SCHEMA BANCO AUTHORIZATION dbo;
 GO
 
@@ -111,7 +115,7 @@ descripcion TEXT NULL
   JOIN BANCO.Prestamos pre ON cu.id = pre.idcuenta
   JOIN BANCO.Transacciones tra ON cu.id = tra.idcuenta
   
- 
+
 
   -- VIEW CLIENTE - DETALLE PRESTAMOS
   CREATE VIEW [BANCO].VW_DETALLE_PRESTAMOS
@@ -127,14 +131,7 @@ descripcion TEXT NULL
 		(SELECT SUM(t2.monto) FROM BANCO.Transacciones t2 JOIN BANCO.Cuentas c ON t2.idcuenta = c.id WHERE idtipotransaccion = 1)
 	) AS deudaactual,	
 	
-	(SELECT 
-		DATEADD
-		(
-			month,
-			(SELECT COUNT(t4.fecha) FROM BANCO.Transacciones t4 JOIN BANCO.Cuentas c ON t4.idcuenta = c.id WHERE t4.idtipotransaccion = 1 GROUP BY t4.fecha)
-				,
-			(SELECT TOP 1 t3.fecha AS fdesembolso FROM BANCO.Transacciones t3 JOIN BANCO.Cuentas c ON t3.idcuenta = c.id WHERE idtipotransaccion = 3 ORDER BY t3.fecha DESC) 
-		)AS fproximopago			
+	(SELECT distinct MAX(fecha) FROM BANCO.Transacciones WHERE idtipotransaccion = 1 			
 	)AS fechaproximopago,
 	pre.montocuota AS montocuotas,
 	(pre.plazo - pre.cuotaspagadas) AS cuotaspendientes,
@@ -152,16 +149,7 @@ descripcion TEXT NULL
   JOIN BANCO.Transacciones tra ON cu.id = tra.idcuenta
  
 
- SELECT * FROM BANCO.Transacciones WHERE idtipotransaccion = 3
-
-
-
-
-
-
-
-
-  -- VIEW CLIENTES
+   -- VIEW HISTORICO DE PRESTAMOS
    CREATE VIEW [BANCO].VW_HISTORICO_PRESTAMOS
   AS
   SELECT 
@@ -170,7 +158,6 @@ descripcion TEXT NULL
 	tra.fecha AS fecha,
 	tip.tipo,	
 	tra.monto
-	
 		
 	
   FROM BANCO.Transacciones tra
