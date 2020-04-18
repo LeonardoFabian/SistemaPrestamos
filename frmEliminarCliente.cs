@@ -26,7 +26,7 @@ namespace Sistema_Prestamista
         {
             con.Open();
             string cedula = txtCedula.Text;
-            string cadena = "SELECT cedula, nombre, apellido, genero, (SELECT FORMAT(fechanacimiento, 'dd/MM/yyyy ')) AS fnacimiento, fecharegistro, direccion, telefono, correo, ultimaactualizacion FROM BANCO.Clientes WHERE cedula=" + cedula;
+            string cadena = "SELECT cedula, nombre, apellido, genero, (SELECT FORMAT(fechanacimiento, 'dd/MM/yyyy ')) AS fnacimiento, fecharegistro, direccion, telefono, correo, ultimaactualizacion FROM BANCO.Clientes WHERE cedula='" + cedula + "'";
             SqlCommand comando = new SqlCommand(cadena, con);
             SqlDataReader registro = comando.ExecuteReader();
 
