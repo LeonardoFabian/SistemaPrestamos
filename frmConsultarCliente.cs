@@ -51,7 +51,7 @@ namespace Sistema_Prestamista
             }
             else
             {
-                MessageBox.Show("No existe un registro con ese número de cédula");
+                MessageBox.Show("Cliente aun no posee historial de prestamos con nosotros, proceda a registrar un prestamo para este cliente");
                 con.Close();
                 txtCedula.Text = "";
             }
