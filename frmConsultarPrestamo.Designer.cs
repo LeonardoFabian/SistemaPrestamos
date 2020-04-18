@@ -52,6 +52,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.btnLimpiarCampos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleTransacciones)).BeginInit();
             this.SuspendLayout();
             // 
@@ -149,7 +150,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(23, 139);
+            this.label4.Location = new System.Drawing.Point(23, 151);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(161, 17);
             this.label4.TabIndex = 45;
@@ -159,7 +160,7 @@
             // 
             this.lblCedula.AutoSize = true;
             this.lblCedula.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCedula.Location = new System.Drawing.Point(432, 139);
+            this.lblCedula.Location = new System.Drawing.Point(432, 151);
             this.lblCedula.Name = "lblCedula";
             this.lblCedula.Size = new System.Drawing.Size(52, 17);
             this.lblCedula.TabIndex = 44;
@@ -170,7 +171,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(22, 115);
+            this.label3.Location = new System.Drawing.Point(22, 127);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(98, 24);
             this.label3.TabIndex = 43;
@@ -180,7 +181,7 @@
             // 
             this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(431, 115);
+            this.lblNombre.Location = new System.Drawing.Point(431, 127);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(79, 24);
             this.lblNombre.TabIndex = 42;
@@ -194,6 +195,7 @@
             this.dgvDetalleTransacciones.Name = "dgvDetalleTransacciones";
             this.dgvDetalleTransacciones.Size = new System.Drawing.Size(763, 136);
             this.dgvDetalleTransacciones.TabIndex = 41;
+            this.dgvDetalleTransacciones.Visible = false;
             // 
             // label1
             // 
@@ -239,7 +241,7 @@
             // 
             this.lblNumeroPrestamo.AutoSize = true;
             this.lblNumeroPrestamo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumeroPrestamo.Location = new System.Drawing.Point(433, 199);
+            this.lblNumeroPrestamo.Location = new System.Drawing.Point(433, 211);
             this.lblNumeroPrestamo.Name = "lblNumeroPrestamo";
             this.lblNumeroPrestamo.Size = new System.Drawing.Size(20, 24);
             this.lblNumeroPrestamo.TabIndex = 58;
@@ -250,7 +252,7 @@
             // 
             this.labelNP.AutoSize = true;
             this.labelNP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNP.Location = new System.Drawing.Point(432, 182);
+            this.labelNP.Location = new System.Drawing.Point(432, 194);
             this.labelNP.Name = "labelNP";
             this.labelNP.Size = new System.Drawing.Size(114, 17);
             this.labelNP.TabIndex = 59;
@@ -297,11 +299,24 @@
             this.label12.TabIndex = 63;
             this.label12.Text = "Transacciones";
             // 
+            // btnLimpiarCampos
+            // 
+            this.btnLimpiarCampos.Enabled = false;
+            this.btnLimpiarCampos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiarCampos.Location = new System.Drawing.Point(631, 85);
+            this.btnLimpiarCampos.Name = "btnLimpiarCampos";
+            this.btnLimpiarCampos.Size = new System.Drawing.Size(154, 29);
+            this.btnLimpiarCampos.TabIndex = 77;
+            this.btnLimpiarCampos.Text = "Limpiar campos";
+            this.btnLimpiarCampos.UseVisualStyleBackColor = true;
+            this.btnLimpiarCampos.Click += new System.EventHandler(this.btnLimpiarCampos_Click);
+            // 
             // frmConsultarPrestamo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 541);
+            this.Controls.Add(this.btnLimpiarCampos);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.lblCuotasPendientes);
@@ -360,5 +375,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnLimpiarCampos;
     }
 }

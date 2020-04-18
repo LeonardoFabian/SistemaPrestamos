@@ -32,14 +32,16 @@ namespace Sistema_Prestamista
 
             if (registro.Read())
             {
+                txtNumeroCuenta.Enabled = false;
                 labelNP.Visible = true;
                 lblNumeroPrestamo.Visible = true;
 
                 btnGuardarCambios.Enabled = true;
                 btnConsultarPrestamo.Enabled = false;
-                btnLimpiarCampos.Enabled = true;
+                btnLimpiarCampos.Enabled = true;               
 
                 dgvDetalleTransacciones.Visible = true;
+                
 
                 lblNumeroPrestamo.Text = registro["idcuenta"].ToString();
                 lblBalanceInicial.Text = registro["balanceinicial"].ToString();
@@ -199,6 +201,8 @@ namespace Sistema_Prestamista
 
         private void btnLimpiarCampos_Click(object sender, EventArgs e)
         {
+            txtNumeroCuenta.Enabled = true;
+
             lblNumeroPrestamo.Text = "";
             lblBalanceInicial.Text = "";
             lblBalanceActual.Text = "";

@@ -32,7 +32,13 @@ namespace Sistema_Prestamista
             SqlDataReader registro = comando.ExecuteReader();
 
             if (registro.Read())
-            {           
+            {
+                txtCedula.Enabled = false;
+
+                btnGuardarCambios.Enabled = true;
+                btnLimpiarCampos.Enabled = true;
+                btnBuscarCliente.Enabled = false;
+
                 txtNombre.Text = registro["nombre"].ToString();
                 txtApellido.Text = registro["apellido"].ToString();
                 txtCedula.Text = registro["cedula"].ToString();
@@ -44,9 +50,9 @@ namespace Sistema_Prestamista
                 txtCorreo.Text = registro["correo"].ToString();
                 txtDireccion.Text = registro["direccion"].ToString();
                 lblUltimaActualizacion.Text = registro["ultimaactualizacion"].ToString();
+
                 con.Close();
-                btnGuardarCambios.Enabled = true;
-                btnLimpiarCampos.Enabled = true;
+                
             }
             else
             {
@@ -85,6 +91,8 @@ namespace Sistema_Prestamista
             {
                 MessageBox.Show("Se modificaron los datos del cliente correctamente");
 
+                
+
                 txtNombre.Text = "";
                 txtApellido.Text = "";
                 txtCedula.Text = "";
@@ -95,6 +103,9 @@ namespace Sistema_Prestamista
                 txtDireccion.Text = "";
                 lblUltimaActualizacion.Text = "";
                 con.Close();
+
+                txtCedula.Enabled = true;
+                btnBuscarCliente.Enabled = true;
                 btnGuardarCambios.Enabled = false;
                 btnLimpiarCampos.Enabled = false;
                 
@@ -111,6 +122,8 @@ namespace Sistema_Prestamista
 
         private void btnLimpiarCampos_Click(object sender, EventArgs e)
         {
+            txtCedula.Enabled = true;
+
             txtNombre.Text = "";
             txtApellido.Text = "";
             txtCedula.Text = "";

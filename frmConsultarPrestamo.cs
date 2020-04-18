@@ -33,10 +33,17 @@ namespace Sistema_Prestamista
 
             if (registro.Read())
             {
+                txtNumeroCuenta.Enabled = false;
+
                 lblNombre.Visible = true;
                 lblCedula.Visible = true;
                 labelNP.Visible = true;
                 lblNumeroPrestamo.Visible = true;
+
+                btnConsultarPrestamo.Enabled = false;
+                btnLimpiarCampos.Enabled = true;
+
+                dgvDetalleTransacciones.Visible = true;
 
                 lblNombre.Text = registro["nombre"].ToString();
                 lblCedula.Text = registro["cedula"].ToString();
@@ -45,6 +52,8 @@ namespace Sistema_Prestamista
                 lblBalanceActual.Text = registro["balanceactual"].ToString();
                 lblCuotaMensual.Text = registro["cuotamensual"].ToString();
                 lblCuotasPendientes.Text = registro["cuotaspendientes"].ToString();
+
+                con.Close();
             }
             else
             {
@@ -73,6 +82,28 @@ namespace Sistema_Prestamista
             dgvDetalleTransacciones.DataSource = dt;
             con.Close();   
 
+        }
+
+        private void btnLimpiarCampos_Click(object sender, EventArgs e)
+        {
+            txtNumeroCuenta.Enabled = true;
+
+            btnLimpiarCampos.Enabled = false;
+            btnConsultarPrestamo.Enabled = true;
+
+            txtNumeroCuenta.Text = "";
+
+            lblBalanceActual.Text = "";
+            lblBalanceInicial.Text = "";
+            lblCuotaMensual.Text = "";
+            lblCuotasPendientes.Text = "";
+            lblCedula.Text = "";
+            lblNombre.Text = "";
+            lblNumeroPrestamo.Text = "";
+            labelNP.Text = "";
+
+            dgvDetalleTransacciones.Visible = false;
+            
         }
     }
 }
