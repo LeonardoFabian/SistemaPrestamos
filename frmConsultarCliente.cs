@@ -13,7 +13,8 @@ using System.Data.SqlClient;
 namespace Sistema_Prestamista
 {
     public partial class frmConsultarCliente : Form
-    {       
+    {
+        SqlConnection con = new SqlConnection("server=(localdb)\\myLocalDB ; database=prestamos-app ; integrated security = true ; MultipleActiveResultSets = true ");
 
         public frmConsultarCliente()
         {
@@ -21,8 +22,7 @@ namespace Sistema_Prestamista
         }
 
         private void btnConsultarCliente_Click(object sender, EventArgs e)
-        {
-            SqlConnection con = new SqlConnection("server=(localdb)\\myLocalDB ; database=prestamos-app ; integrated security = true ; MultipleActiveResultSets = true ");
+        {            
             con.Open();            
             string cedula = txtCedula.Text;
             string cadena = "SELECT * FROM BANCO.VW_BALANCE_TOTAL_PRESTAMOS WHERE cedula='" + cedula + "'";

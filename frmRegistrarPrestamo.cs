@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace Sistema_Prestamista
 {      
@@ -17,6 +18,9 @@ namespace Sistema_Prestamista
     {
 
         SqlConnection con = new SqlConnection("server=(localdb)\\myLocalDB ; database=prestamos-app ; integrated security = true ; MultipleActiveResultSets = true");
+
+        NumberStyles style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol;
+        CultureInfo provider = new CultureInfo("es-DO");
 
         public frmRegistrarPrestamo()
         {
@@ -193,14 +197,16 @@ namespace Sistema_Prestamista
             string tipoPrestamo = txtTipoPrestamo.Text;
 
             string monto = txtMonto.Text;
-            double doubleMonto = double.Parse(monto);
+            decimal decimalMonto = decimal.Parse(monto, style, provider);
 
             string plazo = txtPlazo.Text;
             int intPlazo = int.Parse(plazo);
 
             // Calcular cuota
-            double calcularCuota = (doubleMonto / intPlazo);
-            string cuota = calcularCuota.ToString();
+            decimal calcularCuota = (decimalMonto / intPlazo);
+            decimal roundCalcularCuota = decimal.Round(calcularCuota, 2);            
+
+            string cuota = roundCalcularCuota.ToString();
             lblCuotaMensual.Text = cuota;
 
             string cuentaId = txtCuentaNumero.Text;
@@ -263,17 +269,21 @@ namespace Sistema_Prestamista
             int cuentaId = int.Parse(sCuentaId);//INSERT
 
             string sMonto = txtMonto.Text;
-            double monto = double.Parse(sMonto);//INSERT
+            decimal decimalMonto = decimal.Parse(sMonto, style, provider);
+            decimal roundedMonto = decimal.Round(decimalMonto, 2);
+            decimal monto = roundedMonto;//INSERT
 
             string sPlazo = txtPlazo.Text;
             int plazo = int.Parse(sPlazo);//INSERT
             
             string sCuota = lblCuotaMensual.Text;
-            double cuota = double.Parse(sCuota);//INSERT
+            decimal decimalCuota = decimal.Parse(sCuota, style, provider);
+            decimal roundedCuota = decimal.Round(decimalCuota, 2);
+            decimal cuota = roundedCuota;//INSERT
 
             DateTime fechaDesembolso = DateTime.Now;//INSERT
 
-            string sTasa = lblTasa.Text;
+            string sTasa = lblTasa.Text;           
             double tasa = double.Parse(sTasa);//INSERT
 
             int cuotasPagadas = 0;//INSERT
@@ -341,7 +351,10 @@ namespace Sistema_Prestamista
                 int idCliente = int.Parse(sIdCliente);
                 int cuenta = int.Parse(sCuenta);
                 int idTipoTransaccion = 3;
-                double monto = double.Parse(sMonto);
+
+                decimal decimalMonto = decimal.Parse(sMonto, style, provider);
+                decimal roundedMonto = decimal.Round(decimalMonto, 2);
+                decimal monto = roundedMonto;
                 DateTime fechaTransaccion = DateTime.Now;
 
 

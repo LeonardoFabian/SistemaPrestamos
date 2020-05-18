@@ -13,12 +13,13 @@ namespace Sistema_Prestamista
     public partial class Conection
     {
         SqlConnection con;
+
        
         public void Conectar()
         {
             con = new SqlConnection("server=(localdb)\\myLocalDB ; database=prestamos-app ; integrated security = true ");
             con.Open();
-            MessageBox.Show("Conexion establecida!");
+            //MessageBox.Show("Conexion establecida!");           
             
         }
 
